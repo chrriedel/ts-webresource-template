@@ -73,6 +73,12 @@ The script prompts the user for the following information:
    - Example: `Do you want to add unit testing to your project? Enter 'y' for yes, or 'n' for no:`
    - Sets a boolean variable (`varJest`) based on the user's input.
 
+8. **Edge Remote Debugging**:
+
+   - Asks if you want to automatically set up Edge for remote debugging.
+   - Example: `Would you like to close all Edge instances and start a new one in remote debugging mode? Enter 'y' for yes, or 'n' for no:`
+   - If accepted, handles the Edge browser setup automatically.
+
 ### Installation and Setup
 
 The script performs the following tasks to set up the project:
@@ -142,7 +148,15 @@ The script performs the following tasks to set up the project:
 12. **Display Instructions**:
 
     - Displays instructions for adding the URL to `launch.json`.
-    - Provides commands to start Edge in remote debugging mode.
+
+13. **Edge Remote Debugging Setup**:
+
+   - Asks if you want to automatically close all Edge instances and start a new one in remote debugging mode.
+   - If accepted:
+     - Closes all running Edge instances
+     - Starts Edge with remote debugging enabled
+   - If declined:
+     - Displays manual instructions for enabling remote debugging
 
 ### Usage
 
