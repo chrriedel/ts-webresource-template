@@ -47,7 +47,7 @@ echo "Enter 'y' for true, or 'n' for false: "
 read varPrettier
 
 # Set the variable varPrettier based on the user input
-if [ "$varPrettier" != "y" ] && [ "$varPrettier" = "n" ]; then
+if [ "$varPrettier" != "y" ] && [ "$varPrettier" != "n" ]; then
   echo "Invalid input. Please enter 'y' or 'n'."
   exit 1
 fi
@@ -58,7 +58,7 @@ echo "Enter 'y' for true, or 'n' for false: "
 read varJest
 
 # Set the variable varJest based on the user input
-if [ "$varJest" != "y" ] && [ "$varJest" = "n" ]; then
+if [ "$varJest" != "y" ] && [ "$varJest" != "n" ]; then
   echo "Invalid input. Please enter 'y' or 'n'."
   exit 1
 fi
@@ -532,6 +532,20 @@ fi
 # Modified echo statements with color
 echo -e "${YELLOW}Make sure to add your URL to the launch.json file${NC}"
 
-echo -e "${GREEN}Please close all Edge instances and use the following command:${NC}"
-echo -e "${GREEN}/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --remote-debugging-port=9222${NC}"
-echo -e "${GREEN}to start Edge in remote debugging mode${NC}"
+# Ask if user wants to restart Edge in debug mode
+echo -e "\n${BLUE}Would you like to close all Edge instances and start a new one in remote debugging mode?${NC}"
+echo "Enter 'y' for yes, or 'n' for no: "
+read varEdgeDebug
+
+if [ "$varEdgeDebug" = "y" ]; then
+    echo -e "${YELLOW}Closing all Edge instances...${NC}"
+    killall "Microsoft Edge" 2>/dev/null || true
+    echo -e "${GREEN}Starting Edge in remote debugging mode...${NC}"
+    open -a "Microsoft Edge" --args "--remote-debugging-port=9222"
+else
+    # Show manual instructions
+    echo -e "${YELLOW}Make sure to add your URL to the launch.json file${NC}"
+    echo -e "${GREEN}Please close all Edge instances and use the following command:${NC}"
+    echo -e "${GREEN}/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --remote-debugging-port=9222${NC}"
+    echo -e "${GREEN}to start Edge in remote debugging mode${NC}"
+fi
